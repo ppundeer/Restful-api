@@ -13,7 +13,7 @@ import datetime as dt
 class storeList(APIView):
 
     def get(self, request):
-        item = superstore.objects.all()
+        item = superstore.objects.all()[:100]
         serializer = storeSerializer(item, many=True)
         return Response(serializer.data)
 
