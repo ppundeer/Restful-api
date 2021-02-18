@@ -80,13 +80,13 @@ class queryList2(APIView):
 class queryList3(APIView):
     def get(self, request):
 
-        query_1 = superstore.objects.filter(order_date__year=2015).values('state').annotate(sales=Sum('sales'),
+        query_1 = superstore.objects.filter(order_date__year=2014).values('state').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
-        query_2 = superstore.objects.filter(order_date__year=2016).values('state').annotate(sales=Sum('sales'),
+        query_2 = superstore.objects.filter(order_date__year=2015).values('state').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
-        query_3 = superstore.objects.filter(order_date__year=2017).values('state').annotate(sales=Sum('sales'),
+        query_3 = superstore.objects.filter(order_date__year=2016).values('state').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
-        query_4 = superstore.objects.filter(order_date__year=2018).values('state').annotate(sales=Sum('sales'),
+        query_4 = superstore.objects.filter(order_date__year=2017).values('state').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
 
         return JsonResponse({2014: list(query_1), 2015: list(query_2), 2016: list(query_3), 2017: list(query_4)})
@@ -95,13 +95,13 @@ class queryList3(APIView):
 class queryList4(APIView):
     def get(self, request):
 
-        query_1 = superstore.objects.filter(order_date__year=2015).values('city').annotate(sales=Sum('sales'),
+        query_1 = superstore.objects.filter(order_date__year=2014).values('city').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
-        query_2 = superstore.objects.filter(order_date__year=2016).values('city').annotate(sales=Sum('sales'),
+        query_2 = superstore.objects.filter(order_date__year=2015).values('city').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
-        query_3 = superstore.objects.filter(order_date__year=2017).values('city').annotate(sales=Sum('sales'),
+        query_3 = superstore.objects.filter(order_date__year=2016).values('city').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
-        query_4 = superstore.objects.filter(order_date__year=2018).values('city').annotate(sales=Sum('sales'),
+        query_4 = superstore.objects.filter(order_date__year=2017).values('city').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
 
         return JsonResponse({2014: list(query_1), 2015: list(query_2), 2016: list(query_3), 2017: list(query_4)})
