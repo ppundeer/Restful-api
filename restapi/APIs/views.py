@@ -56,7 +56,7 @@ class queryList1(APIView):
                                          2016: list(query_s3), 2017: list(query_s4)},
                              "category": {2014: list(query_c1), 2015: list(query_c2),
                                           2016: list(query_c3), 2017: list(query_c4)},
-                             "sub-category": {2014: list(query_b1), 2015: list(query_b2),
+                             "sub_category": {2014: list(query_b1), 2015: list(query_b2),
                                               2016: list(query_b3), 2017: list(query_b4)},
                              "region": {2014: list(query_r1), 2015: list(query_r2),
                                         2016: list(query_r3), 2017: list(query_r4)}
