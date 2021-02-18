@@ -15,7 +15,8 @@ class StatList(ListAPIView):
         serializer = StatSerializer(list(query), many=True)
         return Response(serializer.data)
 
-class queryList(APIView):
+class queryList1(APIView):
+
     def get(self, request):
         query_s1 = superstore.objects.filter(order_date__year=2014).values('segment').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
@@ -50,13 +51,21 @@ class queryList(APIView):
         query_r4 = superstore.objects.filter(order_date__year=2017).values('region').annotate(sales=Sum('sales'),
                                                                                             profit=Sum('profit'))
 
-        return JsonResponse({"segment_2014": list(query_s1), "segment_2015": list(query_s2),
-                             "segment_2016": list(query_s3), "segment_2017": list(query_s4),
-                             "category_2014": list(query_c1), "category_2015": list(query_c2),
-                             "category_2016": list(query_c3), "category_2017": list(query_c4),
-                             "subcatg_2014": list(query_b1), "subcatg_2015": list(query_b2),
-                             "subcatg_2016": list(query_b3), "subcatg_2017": list(query_b4),
-                             "region_2014": list(query_r1), "region_2015": list(query_r2),
-                             "region_2016": list(query_r3), "region_2017": list(query_r4)
+        return JsonResponse({"segment": {2014: list(query_s1), 2015: list(query_s2),
+                                         2016: list(query_s3), 2017: list(query_s4)},
+                             "category": {2014: list(query_c1), 2015: list(query_c2),
+                                          2016: list(query_c3), 2017: list(query_c4)},
+                             "sub-category": {2014: list(query_b1), 2015: list(query_b2),
+                                              2016: list(query_b3), 2017: list(query_b4)},
+                             "region": {2014: list(query_r1), 2015: list(query_r2),
+                                        2016: list(query_r3), 2017: list(query_r4)}
                              })
 
+# class queryList2(APIView):
+#     def get(self, request):
+#         query_1 = superstore.objects.filter(order_date__year=2014).values('segment').annotate(sales=Sum('sales'),
+#                                                                                             profit=Sum('profit'))
+#
+#
+#         return JsonResponse({2014: list(query_1)
+#                              })

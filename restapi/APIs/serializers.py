@@ -7,4 +7,4 @@ class StatSerializer(serializers.Serializer):
     profit = serializers.DecimalField(max_digits=12, decimal_places=5, required=True)
 
     class Meta:
-        fields = ('segment', 'sale', 'profit')
+        fields = ('segment', 'sales', 'profit')
