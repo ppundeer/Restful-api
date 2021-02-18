@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from restapi.models import superstore
 from .serializers import StatSerializer
 from django.db.models import Sum
+from django.db.models.functions import ExtractMonth
 
 class StatList(ListAPIView):
     serializer_class = StatSerializer
@@ -61,11 +62,46 @@ class queryList1(APIView):
                                         2016: list(query_r3), 2017: list(query_r4)}
                              })
 
-# class queryList2(APIView):
-#     def get(self, request):
-#         query_1 = superstore.objects.filter(order_date__year=2014).values('segment').annotate(sales=Sum('sales'),
-#                                                                                             profit=Sum('profit'))
-#
-#
-#         return JsonResponse({2014: list(query_1)
-#                              })
+class queryList2(APIView):
+    def get(self, request):
+
+        query_1 = superstore.objects.filter(order_date__year=2014).annotate(month=ExtractMonth('order_date'))\
+                .values('month').annotate(sales=Sum('sales'), profit=Sum('profit')).order_by('month')
+        query_2 = superstore.objects.filter(order_date__year=2015).annotate(month=ExtractMonth('order_date'))\
+                .values('month').annotate(sales=Sum('sales'), profit=Sum('profit')).order_by('month')
+        query_3 = superstore.objects.filter(order_date__year=2016).annotate(month=ExtractMonth('order_date'))\
+                .values('month').annotate(sales=Sum('sales'), profit=Sum('profit')).order_by('month')
+        query_4 = superstore.objects.filter(order_date__year=2017).annotate(month=ExtractMonth('order_date'))\
+                .values('month').annotate(sales=Sum('sales'), profit=Sum('profit')).order_by('month')
+
+        return JsonResponse({2014: list(query_1), 2015: list(query_2), 2016: list(query_3), 2017: list(query_4)})
+
+
+class queryList3(APIView):
+    def get(self, request):
+
+        query_1 = superstore.objects.filter(order_date__year=2015).values('state').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+        query_2 = superstore.objects.filter(order_date__year=2016).values('state').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+        query_3 = superstore.objects.filter(order_date__year=2017).values('state').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+        query_4 = superstore.objects.filter(order_date__year=2018).values('state').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+
+        return JsonResponse({2014: list(query_1), 2015: list(query_2), 2016: list(query_3), 2017: list(query_4)})
+
+
+class queryList4(APIView):
+    def get(self, request):
+
+        query_1 = superstore.objects.filter(order_date__year=2015).values('city').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+        query_2 = superstore.objects.filter(order_date__year=2016).values('city').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+        query_3 = superstore.objects.filter(order_date__year=2017).values('city').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+        query_4 = superstore.objects.filter(order_date__year=2018).values('city').annotate(sales=Sum('sales'),
+                                                                                            profit=Sum('profit'))
+
+        return JsonResponse({2014: list(query_1), 2015: list(query_2), 2016: list(query_3), 2017: list(query_4)})
