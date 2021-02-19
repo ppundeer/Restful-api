@@ -1,20 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from restapi.models import superstore
-from .serializers import StatSerializer
 from django.db.models import Sum
-from django.db.models.functions import ExtractMonth
-
-class StatList(ListAPIView):
-    serializer_class = StatSerializer
-    queryset = superstore.objects.filter(order_date__year=2015).values('segment').annotate(sales=Sum('sales'), profit=Sum('profit'))
-    def list(self, request):
-        query = self.get_queryset()
-        serializer = StatSerializer(list(query), many=True)
-        return Response(serializer.data)
+from django.db.models.functions import ExtractMonth, ExtractYear
 
 class queryList1(APIView):
 
@@ -74,7 +64,8 @@ class queryList2(APIView):
         query_4 = superstore.objects.filter(order_date__year=2017).annotate(month=ExtractMonth('order_date'))\
                 .values('month').annotate(sales=Sum('sales'), profit=Sum('profit')).order_by('month')
 
-        return JsonResponse({2014: list(query_1), 2015: list(query_2), 2016: list(query_3), 2017: list(query_4)})
+        return JsonResponse({2014: list(query_1), 2015: list(query_2),
+                             2016: list(query_3), 2017: list(query_4)})
 
 
 class queryList3(APIView):
