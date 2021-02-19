@@ -46,7 +46,7 @@ class segmentList(ListAPIView):
 
         return Response(serializer)
 ```
-The APIlist view can be obtained from the link specified at urls.py file.
+The APIList view can be obtained from the link specified at urls.py file.
 For example, we get the following data with related nested fields from our 'type' serializer:
 ```
 {
