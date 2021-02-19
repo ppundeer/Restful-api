@@ -82,5 +82,3 @@ For example, we get the following data with related nested fields from our 'type
 
 ## Authors
 - github/ppundeer
-- github/hitesh
-- github/vaibhavsaini2000
