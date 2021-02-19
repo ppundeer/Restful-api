@@ -1,7 +1,7 @@
 # Restful-api
 
 ## Data Dashboard with Django-Rest framework
-This is a Dashboard app build using Django REST Framework for backend and ReactJS for frontend. It include 4 charts with filters for year, sales and profit.
+This is a Dashboard app built using Django REST Framework for backend and ReactJS for frontend. It include 4 charts with filters for year, sales and profit.
 
 It has the following features:
 - The backend is hosted at heroku, using PostgreSQL for database
