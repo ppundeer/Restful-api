@@ -75,7 +75,7 @@ For example, we get the following data with related nested fields from our 'type
         ...
         }
 }
-'''
+```
 ## ReactJS Based Frontend
 
 ## User Authentication and Session Management
